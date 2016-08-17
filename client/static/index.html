@@ -44,15 +44,27 @@
     <link rel="stylesheet" href="https://cdn.firebase.com/libs/firepad/1.3.0/firepad.css" />
     <script src="https://cdn.firebase.com/libs/firepad/1.3.0/firepad.min.js"></script>
 
-    <!-- Custom -->
-    <link rel="stylesheet" type="text/css" href="style/cm-s-atom.css">
-    <link rel="stylesheet" type="text/css" href="style/main.css">
-
+    <!-- Other -->
     <script src="https://cdn.pubnub.com/pubnub.min.js"></script>
     <script src="https://stephenlb.github.io/webrtc-sdk/js/webrtc.js"></script>
     <script src="https://awwapp.com/static/widget/js/aww.min.js"></script>
+<<<<<<< 870e8051382777481dc64f1b8845ae1ea91a09c4
+=======
+
+>>>>>>> (dev) rearrange index for cleanliness
   </head>
   <body>
-    <div id="root"></div>
+
+    <!-- Custom -->
+    <!-- CSS must be added here to prevent awwapp css from overwriting due to poor CSS implementation in the API -->
+    <link rel="stylesheet" type="text/css" href="../../src/photon-0.1.2-dist/css/photon.min.css">
+    <link rel="stylesheet" type="text/css" href="style/cm-s-atom.css">
+    <link rel="stylesheet" type="text/css" href="style/main.css">
+
+    <div class="window">
+      <div id="root"></div>
+      <div class="toolbar toolbar-footer"></div>
+    </div>
+
     <script src="../compiled/bundle.js"></script>
 </html>
