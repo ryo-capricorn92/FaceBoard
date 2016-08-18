@@ -21,7 +21,7 @@ class MainSession extends React.Component {
         'utils'],
       tools: ['pencil', 'eraser', 'text', 'image', 'undo', 'trash'],
       colors: [ "#000000", "#f44336", "#4caf50", "#2196f3",
-        "#ffc107", "#9c27b0",     "#e91e63", "#795548"],
+        "#ffc107", "#9c27b0", "#e91e63", "#795548"],
       defaultColor: "#000000",
       defaultSize: 8,
       defaultTool: 'pencil'
@@ -31,9 +31,12 @@ class MainSession extends React.Component {
     this.props.dispatch(fetchFirepad(this.props.mode));
   }
 
-  toggleEditor () {
-    console.log('made it to toggleEditor');
-    this.props.dispatch(toggleDiv(this.props.hidden));
+  toggleEditor (e) {
+    if (e.target.id === 'codeshareTab') {
+      this.props.dispatch(toggleDiv(false));
+    } else {
+      this.props.dispatch(toggleDiv(true));
+    }
   }
 
   changeMode (e) {
@@ -47,23 +50,33 @@ class MainSession extends React.Component {
   render () {
     return (
       <div id="mainSession">
-        <div id="firepad" className={!this.props.hidden ? 'hidden' : 'open'}>
+        <div className="tab-group">
+          <div className={ this.props.hidden ? 'tab-item active' : 'tab-item' } id="codeshareTab" onClick={this.toggleEditor.bind(this)}>
+            <span className="icon icon-cancel icon-close-tab"></span>
+            Codeshare
+          </div>
+          <div className={ !this.props.hidden ? 'tab-item active' : 'tab-item' } id="whiteboardTab" onClick={this.toggleEditor.bind(this)}>
+            <span className="icon icon-cancel icon-close-tab"></span>
+            Whiteboard
+          </div>
+        </div>
+        <div id="firepadContainer" className={!this.props.hidden ? 'hidden' : 'open'}>
+          <select id="cmMode" className="form-control" onChange={this.changeMode.bind(this)}>
+            <option value="javascript">javascript</option>
+            <option value="jsx">jsx</option>
+            <option value="css">css</option>
+            <option value="htmlmixed">html - mixed</option>
+            <option value="php">php</option>
+            <option value="ruby">ruby</option>
+            <option value="python">python</option>
+            <option value="markdown">markdown</option>
+            <option value="sass">sass</option>
+            <option value="sql">sql</option>
+          </select>
+          <div id="firepad"></div>
         </div>
         <div id="whiteboard" className={this.props.hidden ? 'hidden' : 'open'}>
         </div>
-        <button onClick={this.toggleEditor.bind(this)} >click me</button>
-        <select id="cmMode" onChange={this.changeMode.bind(this)}>
-          <option value="javascript">javascript</option>
-          <option value="jsx">jsx</option>
-          <option value="css">css</option>
-          <option value="htmlmixed">html - mixed</option>
-          <option value="php">php</option>
-          <option value="ruby">ruby</option>
-          <option value="python">python</option>
-          <option value="markdown">markdown</option>
-          <option value="sass">sass</option>
-          <option value="sql">sql</option>
-        </select>
       </div>
     );
   }
